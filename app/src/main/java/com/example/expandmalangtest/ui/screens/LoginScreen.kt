@@ -30,7 +30,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
     ) {
         // Logo Placeholder
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
+            painter = painterResource(id = R.drawable.ic_background_malang),
             contentDescription = "Logo",
             modifier = Modifier.size(100.dp)
         )
