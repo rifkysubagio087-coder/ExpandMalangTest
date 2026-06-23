@@ -28,7 +28,7 @@ import com.example.expandmalangtest.data.SampleData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onNavigateToDetails: (Int) -> Unit = {}) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -151,7 +151,7 @@ fun HomeScreen() {
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(SampleData.places) { place ->
-                FeaturedPlaceCard(place)
+                FeaturedPlaceCard(place, onClick = { onNavigateToDetails(place.id) })
             }
         }
 
@@ -159,7 +159,7 @@ fun HomeScreen() {
         SectionHeader(title = "Popular Near You", action = "See All")
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             SampleData.places.take(2).forEach { place ->
-                PopularPlaceItem(place)
+                PopularPlaceItem(place, onClick = { onNavigateToDetails(place.id) })
                 Spacer(modifier = Modifier.height(12.dp))
             }
         }
@@ -200,7 +200,7 @@ fun CategoryItem(name: String, icon: ImageVector) {
 }
 
 @Composable
-fun FeaturedPlaceCard(place: Place) {
+fun FeaturedPlaceCard(place: Place, onClick: () -> Unit = {}) {
     Card(
         modifier = Modifier.width(200.dp),
         shape = RoundedCornerShape(16.dp),
@@ -238,7 +238,7 @@ fun FeaturedPlaceCard(place: Place) {
                 ) {
                     Text(text = "${place.price} / person", fontWeight = FontWeight.Bold, color = Color(0xFF52B788), fontSize = 12.sp)
                     Button(
-                        onClick = {},
+                        onClick = onClick,
                         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
                         modifier = Modifier.height(30.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF52B788)),
@@ -253,9 +253,10 @@ fun FeaturedPlaceCard(place: Place) {
 }
 
 @Composable
-fun PopularPlaceItem(place: Place) {
+fun PopularPlaceItem(place: Place, onClick: () -> Unit = {}) {
     Row(
         modifier = Modifier
+            .clickable { onClick() }
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp))
             .background(Color.White)
@@ -276,6 +277,11 @@ fun PopularPlaceItem(place: Place) {
             Text(text = place.name, fontWeight = FontWeight.Bold, fontSize = 14.sp)
             Text(text = place.description, fontSize = 11.sp, color = Color.Gray)
         }
-        Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, tint = Color(0xFF52B788), modifier = Modifier.size(16.dp))
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+            contentDescription = null,
+            tint = Color(0xFF52B788),
+            modifier = Modifier.size(16.dp)
+        )
     }
 }

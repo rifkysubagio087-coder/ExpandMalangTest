@@ -22,6 +22,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import com.example.expandmalangtest.data.SampleData
 import com.example.expandmalangtest.navigation.Screen
 import com.example.expandmalangtest.ui.screens.*
 import com.example.expandmalangtest.ui.theme.ExpandMalangTestTheme
@@ -66,7 +69,7 @@ fun MainAppContent() {
         bottomBar = {
             NavigationBar(
                 containerColor = Color.White,
-                tonalElevation = 0.dp // Matikan elevasi agar tidak ada bayangan abu-abu
+                tonalElevation = 0.dp
             ) {
                 val items = listOf(
                     NavigationItemInfo("Home", Screen.Home.route, Icons.Default.Home),
@@ -105,10 +108,31 @@ fun MainAppContent() {
             startDestination = Screen.Home.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable(Screen.Home.route) { HomeScreen() }
-            composable(Screen.Explore.route) { ExploreScreen() }
+            composable(Screen.Home.route) {
+                HomeScreen(onNavigateToDetails = { placeId ->
+                    navController.navigate("details/$placeId")
+                })
+            }
+            composable(Screen.Explore.route) {
+                ExploreScreen(onNavigateToDetails = { placeId ->
+                    navController.navigate("details/$placeId")
+                })
+            }
             composable(Screen.MyTrips.route) { MyTripsScreen() }
             composable(Screen.Profile.route) { ProfileScreen() }
+
+            composable(
+                route = "details/{placeId}",
+                arguments = listOf(navArgument("placeId") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val placeId = backStackEntry.arguments?.getInt("placeId") ?: 1
+                val place = SampleData.places.find { it.id == placeId } ?: SampleData.places.first()
+
+                ViewDetailsScreen(
+                    place = place,
+                    onBackClick = { navController.popBackStack() }
+                )
+            }
         }
     }
 }

@@ -28,7 +28,7 @@ import com.example.expandmalangtest.data.SampleData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExploreScreen() {
+fun ExploreScreen(onNavigateToDetails: (Int) -> Unit = {}) {
     Box(modifier = Modifier.fillMaxSize().background(Color.White)) {
         // Map Placeholder
         Box(
@@ -91,7 +91,7 @@ fun ExploreScreen() {
                 modifier = Modifier.padding(bottom = 16.dp)
             ) {
                 items(SampleData.places) { place ->
-                    ExplorePlaceCard(place)
+                    ExplorePlaceCard(place, onClick = { onNavigateToDetails(place.id) })
                 }
             }
         }
@@ -99,7 +99,7 @@ fun ExploreScreen() {
 }
 
 @Composable
-fun ExplorePlaceCard(place: Place) {
+fun ExplorePlaceCard(place: Place, onClick: () -> Unit = {}) {
     Card(
         modifier = Modifier.width(280.dp),
         shape = RoundedCornerShape(16.dp),
@@ -136,7 +136,7 @@ fun ExplorePlaceCard(place: Place) {
                     modifier = Modifier.padding(vertical = 4.dp)
                 )
                 Button(
-                    onClick = {},
+                    onClick = onClick,
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2D6A4F)),
                     shape = RoundedCornerShape(8.dp)
