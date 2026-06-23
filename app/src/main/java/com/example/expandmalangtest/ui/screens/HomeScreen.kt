@@ -202,12 +202,14 @@ fun CategoryItem(name: String, icon: ImageVector) {
 @Composable
 fun FeaturedPlaceCard(place: Place, onClick: () -> Unit = {}) {
     Card(
-        modifier = Modifier.width(200.dp),
+        modifier = Modifier
+            .width(200.dp)
+            .height(240.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(2.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
-        Column {
+        Column(modifier = Modifier.fillMaxSize()) {
             Box(modifier = Modifier.height(120.dp).fillMaxWidth()) {
                 Image(
                     painter = painterResource(id = place.imageRes),
@@ -227,16 +229,21 @@ fun FeaturedPlaceCard(place: Place, onClick: () -> Unit = {}) {
                     Icon(Icons.Outlined.FavoriteBorder, contentDescription = null, modifier = Modifier.size(16.dp))
                 }
             }
-            Column(modifier = Modifier.padding(12.dp)) {
+            Column(modifier = Modifier.padding(12.dp).fillMaxHeight()) {
                 Text(text = place.name, fontWeight = FontWeight.Bold, fontSize = 16.sp)
                 Text(text = place.description, fontSize = 11.sp, color = Color.Gray, maxLines = 1)
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.weight(1f))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(text = "${place.price} / person", fontWeight = FontWeight.Bold, color = Color(0xFF52B788), fontSize = 12.sp)
+                    Text(
+                        text = "${place.price} / person",
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF52B788),
+                        fontSize = 12.sp,
+                        modifier = Modifier.weight(1f)
+                    )
                     Button(
                         onClick = onClick,
                         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),

@@ -101,12 +101,14 @@ fun ExploreScreen(onNavigateToDetails: (Int) -> Unit = {}) {
 @Composable
 fun ExplorePlaceCard(place: Place, onClick: () -> Unit = {}) {
     Card(
-        modifier = Modifier.width(280.dp),
+        modifier = Modifier
+            .width(280.dp)
+            .height(300.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
-        Column {
+        Column(modifier = Modifier.fillMaxSize()) {
             Box(modifier = Modifier.height(150.dp).fillMaxWidth()) {
                 Image(
                     painter = painterResource(id = place.imageRes),
@@ -126,7 +128,7 @@ fun ExplorePlaceCard(place: Place, onClick: () -> Unit = {}) {
                     Icon(Icons.Outlined.FavoriteBorder, contentDescription = null, modifier = Modifier.size(16.dp))
                 }
             }
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(modifier = Modifier.padding(16.dp).weight(1f)) {
                 Text(text = place.name, fontWeight = FontWeight.Bold, fontSize = 18.sp)
                 Text(
                     text = place.description,
@@ -135,6 +137,7 @@ fun ExplorePlaceCard(place: Place, onClick: () -> Unit = {}) {
                     maxLines = 2,
                     modifier = Modifier.padding(vertical = 4.dp)
                 )
+                Spacer(modifier = Modifier.weight(1f))
                 Button(
                     onClick = onClick,
                     modifier = Modifier.fillMaxWidth(),
