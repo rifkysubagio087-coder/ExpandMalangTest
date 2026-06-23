@@ -54,7 +54,7 @@ fun MyTripsScreen() {
                     .clip(CircleShape)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    painter = painterResource(id = R.drawable.ic_profile),
                     contentDescription = "Profile",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()

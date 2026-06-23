@@ -56,7 +56,7 @@ fun ProfileScreen() {
                     .clip(CircleShape)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    painter = painterResource(id = R.drawable.ic_profile),
                     contentDescription = "Profile",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
@@ -74,7 +74,7 @@ fun ProfileScreen() {
                     .clip(CircleShape)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    painter = painterResource(id = R.drawable.ic_profile),
                     contentDescription = "Profile Picture",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
