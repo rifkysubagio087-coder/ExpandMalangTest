@@ -52,7 +52,7 @@ fun MyTripsScreen(onNavigateToDetails: (Int) -> Unit = {}) {
                 modifier = Modifier.size(32.dp).clip(CircleShape)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    painter = painterResource(id = R.drawable.ic_profile),
                     contentDescription = "Profile",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
