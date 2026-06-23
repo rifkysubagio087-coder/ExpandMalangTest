@@ -103,6 +103,6 @@ object SampleData {
 
     val trips = listOf(
         Trip(1, "Bromo Midnight", "Dec 24, 2024 - 23:30", R.drawable.ic_bromo),
-        Trip(2, "Tumpak Sewu Fall", "Jan 05, 2025 - 08:00", R.drawable.ic_tumpak_sewu)
+        Trip(4, "Tumpak Sewu Fall", "Jan 05, 2025 - 08:00", R.drawable.ic_tumpak_sewu)
     )
 }

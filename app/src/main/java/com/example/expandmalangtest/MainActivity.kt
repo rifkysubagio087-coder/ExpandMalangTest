@@ -118,7 +118,11 @@ fun MainAppContent() {
                     navController.navigate("details/$placeId")
                 })
             }
-            composable(Screen.MyTrips.route) { MyTripsScreen() }
+            composable(Screen.MyTrips.route) {
+                MyTripsScreen(onNavigateToDetails = { placeId ->
+                    navController.navigate("details/$placeId")
+                })
+            }
             composable(Screen.Profile.route) { ProfileScreen() }
 
             composable(

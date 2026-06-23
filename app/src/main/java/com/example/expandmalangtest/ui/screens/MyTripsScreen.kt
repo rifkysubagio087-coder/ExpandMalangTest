@@ -26,7 +26,7 @@ import com.example.expandmalangtest.data.SampleData
 import com.example.expandmalangtest.data.Trip
 
 @Composable
-fun MyTripsScreen() {
+fun MyTripsScreen(onNavigateToDetails: (Int) -> Unit = {}) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,12 +49,10 @@ fun MyTripsScreen() {
                 modifier = Modifier.weight(1f)
             )
             Box(
-                modifier = Modifier
-                    .size(32.dp)
-                    .clip(CircleShape)
+                modifier = Modifier.size(32.dp).clip(CircleShape)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_profile),
+                    painter = painterResource(id = R.drawable.ic_launcher_background),
                     contentDescription = "Profile",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
@@ -71,14 +69,14 @@ fun MyTripsScreen() {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(SampleData.trips) { trip ->
-                TripCard(trip)
+                TripCard(trip = trip, onClick = { onNavigateToDetails(trip.id) })
             }
         }
     }
 }
 
 @Composable
-fun TripCard(trip: Trip) {
+fun TripCard(trip: Trip, onClick: () -> Unit = {}) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
@@ -90,9 +88,7 @@ fun TripCard(trip: Trip) {
                 painter = painterResource(id = trip.imageRes),
                 contentDescription = trip.name,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp)
+                modifier = Modifier.fillMaxWidth().height(150.dp)
             )
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
@@ -116,7 +112,7 @@ fun TripCard(trip: Trip) {
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Button(
-                    onClick = { },
+                    onClick = onClick,
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2D6A4F)),
                     shape = RoundedCornerShape(8.dp),
                     contentPadding = PaddingValues(horizontal = 24.dp, vertical = 8.dp)
